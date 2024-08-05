@@ -7,8 +7,8 @@ self.addEventListener('install', event => {
                 '/assets/style.css', // Asegúrate de incluir tus archivos CSS
                 '/assets/js/script.js', // Asegúrate de incluir tus archivos JavaScript
                 '/manifest.json',
-                '/assets/img/icon-192x192.png',
-                '/assets/img/icon-512x512.png'
+                '/icon-192x192.png',
+                '/icon-512x512.png'
             ]);
         })
     );
