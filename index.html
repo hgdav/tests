@@ -4,13 +4,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neru</title>
+    <title>$ Clink</title>
     <link rel="icon" href="assets/img/favicon.png">
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="assets/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
+
+    <header>
+        <h1 class="app-name">MONEY</h1>
+        <span id="total-amount">S/ 0.00</span>
+    </header>
+    <main>
+        <div id="transaction-list">
+            <!-- Las transacciones se mostrarán aquí -->
+        </div>
+        <canvas id="incomeChart" class="hidden" width="400" height="200"></canvas>
+        <canvas id="expenseChart" class="hidden" width="400" height="200"></canvas>
+    </main>
+    <footer id="footer">
+        <button id="add-income-btn"><img src="assets/img/dollar-symbol.png"></button>
+        <button id="add-expense-btn"><img src="assets/img/minus.png"></button>
+    </footer>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="close-modal">&times;</span>
+            <h2 id="modal-title"></h2>
+            <input type="text" id="transaction-name" placeholder="Nombre">
+            <input type="number" id="transaction-amount" placeholder="Monto">
+            <select id="transaction-tag">
+                <option value="Alimentos">Alimentos</option>
+                <option value="Transporte">Transporte</option>
+                <option value="Entretenimiento">Entretenimiento</option>
+                <option value="Salud">Salud</option>
+                <option value="Otros">Otros</option>
+            </select>
+            <button id="save-transaction">Guardar</button>
+        </div>
+    </div>
+
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {

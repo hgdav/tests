@@ -1,0 +1,192 @@
+:root {
+    --background-color: #010101;
+    --secondary-color: #1a1a1a;
+    --accent-color: #c4332e;
+    --text-color: #ffffff;
+}
+
+@font-face {
+    font-family: 'Nothing';
+    src: url('nothing-font.ttf') format('ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: 'Nothing', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    user-select: none;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text-color);
+    padding: 1rem;
+}
+
+.app-name {
+    margin: 0;
+    color: var(--text-color);
+}
+
+#total-amount {
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+
+main {
+    flex: 1;
+    padding: 1rem;
+    overflow-y: auto;
+}
+
+footer {
+    display: inline-flex;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    padding: 1rem;
+}
+
+button {
+    padding: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: var(--accent-color);
+    color: var(--text-color);
+    transition: background-color 0.3s;
+    margin: 0 0.5rem;
+}
+
+#add-income-btn {
+    background-color: var(--text-color);
+    border-radius: 69px;
+    padding: 2.5rem;
+}
+
+#add-expense-btn {
+    background-color: var(--accent-color);
+    border-radius: 69px;
+    padding: 2.5rem;
+}
+
+#add-income-btn img {
+    width: 3rem;
+}
+
+#add-expense-btn img {
+    width: 3rem;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: var(--secondary-color);
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: var(--background-color);
+    margin: 5% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 88%;
+    color: var(--text-color);
+}
+
+.modal-content h2 {
+    color: var(--text-color);
+    margin-top: 0;
+}
+
+.modal-content input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+}
+
+select {
+    width: calc(100%);
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+}
+
+.modal-content button {
+    width: 99.5%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: var(--accent-color);
+    color: var(--text-color);
+    transition: background-color 0.3s;
+    margin-top: 1rem;
+}
+
+.modal-content button:hover {
+    background-color: var(--text-color);
+    color: var(--background-color);
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: var(--text-color);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.transaction {
+    display: flex;
+    justify-content: space-between;
+    padding: 1.5rem;
+    margin: 8px 0;
+    border-radius: 15px;
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+}
+
+.transaction.income {
+    border-left: 5px solid var(--text-color);
+}
+
+.transaction.expense {
+    border-left: 5px solid var(--accent-color);
+}
+
+.hidden {
+    display: none !important;
+}
+
+canvas {
+    margin-top: 4rem;
+}
