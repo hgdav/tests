@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>$ Clink</title>
     <link rel="icon" href="assets/img/favicon.png">
     <link rel="manifest" href="manifest.json">
@@ -33,14 +33,16 @@
         <div class="modal-content">
             <span class="close" id="close-modal">&times;</span>
             <h2 id="modal-title"></h2>
-            <input type="text" id="transaction-name" placeholder="Nombre">
+            <input type="text" id="transaction-name" placeholder="Razón...">
             <input type="number" id="transaction-amount" placeholder="Monto">
             <select id="transaction-tag">
-                <option value="Alimentos">Alimentos</option>
+                <option value="Sueldo">Sueldo</option>
+<option value="Proyectos">Proyectos</option>
                 <option value="Transporte">Transporte</option>
-                <option value="Entretenimiento">Entretenimiento</option>
-                <option value="Salud">Salud</option>
-                <option value="Otros">Otros</option>
+                <option value="Aseo">Aseo</option>
+                <option value="Medicina">Medicina</option>
+                <option value="Comida">Comida</option>
+<option value="Otros">Otros</option>
             </select>
             <button id="save-transaction">Guardar</button>
         </div>
