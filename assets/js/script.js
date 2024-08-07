@@ -159,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const month = date.getMonth();
             const year = date.getFullYear();
 
-            if (month === currentMonth && year === currentYear) {
+            if (month === currentMonth && year === currentYear && transaction.type === 'expense') {
                 if (!tags[transaction.tag]) {
                     tags[transaction.tag] = 0;
                 }
@@ -179,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
             data: {
                 labels: tagLabels,
                 datasets: [{
-                    label: 'Transacciones por Etiqueta',
+                    label: 'Egresos por Etiqueta',
                     data: tagAmounts,
                     backgroundColor: tagLabels.map(() => '#' + Math.floor(Math.random() * 16777215).toString(16))
                 }]
@@ -268,7 +268,7 @@ document.addEventListener('DOMContentLoaded', () => {
         modalTitle.textContent = isIncome ? 'Agregar Ingreso' : 'Agregar Egreso';
         transactionName.value = '';
         transactionAmount.value = '';
-        transactionTag.value = 'Otros';
+        transactionTag.value = '';
         editingTransactionIndex = -1;
         modal.style.display = 'block';
     }
