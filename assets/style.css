@@ -71,7 +71,7 @@ button {
 #add-income-btn {
     background-color: var(--text-color);
     border-radius: 69px;
-    padding: 2.5rem;
+    padding: 2.5rem 3rem;
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -82,7 +82,7 @@ button {
 #add-expense-btn {
     background-color: var(--accent-color);
     border-radius: 69px;
-    padding: 2.5rem;
+    padding: 2.5rem 3rem;
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -90,20 +90,19 @@ button {
     -webkit-tap-highlight-color: transparent;
 }
 
-#add-income-btn img {
-    width: 3rem;
+#add-income-btn .img {
+    font-family: 'Nothing', sans-serif;
+    font-size: 3rem;
     user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
+    color: var(--background-color);
 }
 
-#add-expense-btn img {
-    width: 3rem;
+#add-expense-btn .img {
+    font-family: 'Nothing', sans-serif;
+    font-size: 3rem;
     user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
+    color: var(--text-color);
+    letter-spacing: -4px;
 }
 
 .modal {
