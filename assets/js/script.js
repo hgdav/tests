@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
             transactionList.appendChild(transactionElement);
         });
 
-        totalAmountDisplay.textContent = `S/ ${totalAmount.toFixed(2)}`;
+        totalAmountDisplay.textContent = `S/${totalAmount.toFixed(2)}`;
 
         if (incomeChart) {
             incomeChart.destroy();

@@ -5,15 +5,8 @@
     --text-color: #ffffff;
 }
 
-@font-face {
-    font-family: 'Nothing';
-    src: url('nothing-font.ttf') format('ttf');
-    font-weight: normal;
-    font-style: normal;
-}
-
 body {
-    font-family: 'Nothing', sans-serif;
+    font-family: "Quicksand", sans-serif;
     margin: 0;
     padding: 0;
     display: flex;
@@ -33,11 +26,13 @@ header {
 }
 
 .app-name {
+    font-family: "Quicksand", sans-serif;
     margin: 0;
     color: var(--text-color);
 }
 
 #total-amount {
+    font-family: "Quicksand", sans-serif;
     font-size: 1.5rem;
     cursor: pointer;
 }
@@ -112,33 +107,35 @@ button {
 .modal-content h2 {
     color: var(--text-color);
     margin-top: 0;
+    text-align: center;
+    text-transform: uppercase;
 }
 
 .modal-content input {
-    width: calc(100% - 20px);
-    padding: 10px;
+    width: calc(100% - 36px);
+    padding: 18px;
     margin: 10px 0;
     border: none;
-    border-radius: 5px;
+    border-radius: 25px;
     background-color: var(--secondary-color);
     color: var(--text-color);
 }
 
 select {
-    width: calc(100%);
-    padding: 10px;
+    width: calc(100% - 3px);
+    padding: 18px;
     margin: 10px 0;
     border: none;
-    border-radius: 5px;
+    border-radius: 25px;
     background-color: var(--secondary-color);
     color: var(--text-color);
 }
 
 .modal-content button {
-    width: 99.5%;
-    padding: 10px;
+    width: 99%;
+    padding: 18px;
     border: none;
-    border-radius: 5px;
+    border-radius: 25px;
     cursor: pointer;
     background-color: var(--accent-color);
     color: var(--text-color);
@@ -152,10 +149,11 @@ select {
 }
 
 .close {
-    color: #aaa;
+    color: var(--accent-color);
     float: right;
-    font-size: 28px;
+    font-size: 40px;
     font-weight: bold;
+    margin-top: -10px;
 }
 
 .close:hover,
