@@ -11,19 +11,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const transactionList = document.getElementById('transaction-list');
     const totalAmountDisplay = document.getElementById('total-amount');
     const combinedCtx = document.getElementById('combinedChart').getContext('2d');
+    const tagPieCtx = document.getElementById('tagPieChart').getContext('2d');
     const prevMonthBtn = document.getElementById('prev-month-btn');
     const nextMonthBtn = document.getElementById('next-month-btn');
     const currentMonthDisplay = document.getElementById('current-month');
+    const toggleChartBtn = document.getElementById('toggle-chart-btn');
     const appName = document.querySelector('.app-name');
     const historyList = document.getElementById('history-list');
 
     let isIncome = true;
     let editingTransactionIndex = -1;
     let combinedChart;
+    let tagPieChart;
     let showingChart = false;
     let showingHistory = false;
     let currentMonth = new Date().getMonth();
     let currentYear = new Date().getFullYear();
+    let showingPieChart = false;
 
     function formatMonthYear(month, year) {
         const months = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
@@ -84,7 +88,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         if (showingChart) {
-            updateChart();
+            if (showingPieChart) {
+                updatePieChart();
+            } else {
+                updateChart();
+            }
         }
     }
 
@@ -142,6 +150,45 @@ document.addEventListener('DOMContentLoaded', () => {
         currentMonthDisplay.textContent = formatMonthYear(currentMonth, currentYear);
     }
 
+    function updatePieChart() {
+        const transactions = JSON.parse(localStorage.getItem('transactions')) || [];
+        const tags = {};
+
+        transactions.forEach(transaction => {
+            const date = new Date(transaction.date);
+            const month = date.getMonth();
+            const year = date.getFullYear();
+
+            if (month === currentMonth && year === currentYear) {
+                if (!tags[transaction.tag]) {
+                    tags[transaction.tag] = 0;
+                }
+                tags[transaction.tag] += transaction.amount;
+            }
+        });
+
+        const tagLabels = Object.keys(tags);
+        const tagAmounts = Object.values(tags);
+
+        if (tagPieChart) {
+            tagPieChart.destroy();
+        }
+
+        tagPieChart = new Chart(tagPieCtx, {
+            type: 'pie',
+            data: {
+                labels: tagLabels,
+                datasets: [{
+                    label: 'Transacciones por Etiqueta',
+                    data: tagAmounts,
+                    backgroundColor: tagLabels.map(() => '#' + Math.floor(Math.random() * 16777215).toString(16))
+                }]
+            }
+        });
+
+        currentMonthDisplay.textContent = formatMonthYear(currentMonth, currentYear);
+    }
+
     function updateHistoryList() {
         historyList.innerHTML = '';
         const transactions = JSON.parse(localStorage.getItem('transactions')) || [];
@@ -161,12 +208,12 @@ document.addEventListener('DOMContentLoaded', () => {
             monthHeader.textContent = monthYear;
             historyList.appendChild(monthHeader);
 
-            monthTransactions.forEach((transaction, index) => {
+            monthTransactions.forEach(transaction => {
                 const transactionElement = document.createElement('div');
                 transactionElement.className = `transaction ${transaction.type}`;
                 transactionElement.innerHTML = `
-                    <span class="transaction-name" data-index="${index}">${transaction.name}</span>
-                    <span class="transaction-amount" data-index="${index}">${transaction.amount.toFixed(2)}</span>
+                    <span class="transaction-name">${transaction.name}</span>
+                    <span class="transaction-amount">${transaction.amount.toFixed(2)}</span>
                 `;
                 historyList.appendChild(transactionElement);
             });
@@ -178,13 +225,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (showingChart) {
             transactionList.classList.add('hidden');
             document.getElementById('footer').classList.add('hidden');
-            historyList.classList.add('hidden');
             document.getElementById('chart-container').classList.remove('hidden');
             updateChart();
         } else {
             transactionList.classList.remove('hidden');
             document.getElementById('footer').classList.remove('hidden');
-            historyList.classList.add('hidden');
             document.getElementById('chart-container').classList.add('hidden');
         }
     }
@@ -202,6 +247,19 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('footer').classList.remove('hidden');
             document.getElementById('chart-container').classList.add('hidden');
             historyList.classList.add('hidden');
+        }
+    }
+
+    function toggleChartType() {
+        showingPieChart = !showingPieChart;
+        if (showingPieChart) {
+            document.getElementById('combinedChart').classList.add('hidden');
+            document.getElementById('tagPieChart').classList.remove('hidden');
+            updatePieChart();
+        } else {
+            document.getElementById('combinedChart').classList.remove('hidden');
+            document.getElementById('tagPieChart').classList.add('hidden');
+            updateChart();
         }
     }
 
@@ -268,7 +326,11 @@ document.addEventListener('DOMContentLoaded', () => {
             currentMonth = 0;
             currentYear += 1;
         }
-        updateChart();
+        if (showingPieChart) {
+            updatePieChart();
+        } else {
+            updateChart();
+        }
     }
 
     addIncomeBtn.addEventListener('click', () => openModal(true));
@@ -279,6 +341,7 @@ document.addEventListener('DOMContentLoaded', () => {
     appName.addEventListener('click', toggleHistoryView);
     prevMonthBtn.addEventListener('click', () => changeMonth(-1));
     nextMonthBtn.addEventListener('click', () => changeMonth(1));
+    toggleChartBtn.addEventListener('click', toggleChartType);
 
     window.addEventListener('click', event => {
         if (event.target === modal) {

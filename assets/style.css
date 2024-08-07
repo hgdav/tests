@@ -225,6 +225,20 @@ canvas {
     text-align: center;
 }
 
+#prev-month-btn,
+#next-month-btn {
+    padding: .6rem;
+}
+
+#toggle-chart-btn {
+    padding: .6rem;
+    margin-top: 3rem;
+}
+
+#toggle-chart-btn img {
+    width: 60%;
+}
+
 @media screen and (max-width: 1000px) {
     #chart-container {
         margin-top: calc(50% - 5rem);
