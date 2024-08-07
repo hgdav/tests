@@ -84,10 +84,18 @@ button {
 
 #add-income-btn img {
     width: 3rem;
+    user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 
 #add-expense-btn img {
     width: 3rem;
+   user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 
 .modal {
