@@ -14,11 +14,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const prevMonthBtn = document.getElementById('prev-month-btn');
     const nextMonthBtn = document.getElementById('next-month-btn');
     const currentMonthDisplay = document.getElementById('current-month');
+    const appName = document.querySelector('.app-name');
+    const historyList = document.getElementById('history-list');
 
     let isIncome = true;
     let editingTransactionIndex = -1;
     let combinedChart;
     let showingChart = false;
+    let showingHistory = false;
     let currentMonth = new Date().getMonth();
     let currentYear = new Date().getFullYear();
 
@@ -32,22 +35,43 @@ document.addEventListener('DOMContentLoaded', () => {
         const transactions = JSON.parse(localStorage.getItem('transactions')) || [];
         let totalAmount = 0;
 
-        transactions.forEach((transaction, index) => {
-            const transactionElement = document.createElement('div');
-            transactionElement.className = `transaction ${transaction.type}`;
-            transactionElement.innerHTML = `
-                <span class="transaction-name" data-index="${index}">${transaction.name}</span>
-                <span class="transaction-amount" data-index="${index}">${transaction.amount.toFixed(2)}</span>
-            `;
+        const now = new Date();
+        const twoMonthsAgo = new Date(now.setMonth(now.getMonth() - 2));
 
-            if (transaction.type === 'income') {
-                totalAmount += transaction.amount;
-            } else {
-                totalAmount -= transaction.amount;
+        const recentTransactions = transactions.filter(transaction => new Date(transaction.date) >= twoMonthsAgo);
+
+        const groupedTransactions = recentTransactions.reduce((acc, transaction) => {
+            const date = new Date(transaction.date);
+            const monthYear = formatMonthYear(date.getMonth(), date.getFullYear());
+            if (!acc[monthYear]) {
+                acc[monthYear] = [];
             }
+            acc[monthYear].push(transaction);
+            return acc;
+        }, {});
 
-            transactionList.appendChild(transactionElement);
-        });
+        for (const [monthYear, monthTransactions] of Object.entries(groupedTransactions)) {
+            const monthHeader = document.createElement('h3');
+            monthHeader.textContent = monthYear;
+            transactionList.appendChild(monthHeader);
+
+            monthTransactions.forEach((transaction, index) => {
+                const transactionElement = document.createElement('div');
+                transactionElement.className = `transaction ${transaction.type}`;
+                transactionElement.innerHTML = `
+                    <span class="transaction-name" data-index="${index}">${transaction.name}</span>
+                    <span class="transaction-amount" data-index="${index}">${transaction.amount.toFixed(2)}</span>
+                `;
+
+                if (transaction.type === 'income') {
+                    totalAmount += transaction.amount;
+                } else {
+                    totalAmount -= transaction.amount;
+                }
+
+                transactionList.appendChild(transactionElement);
+            });
+        }
 
         totalAmountDisplay.textContent = `S/${totalAmount.toFixed(2)}`;
 
@@ -118,30 +142,67 @@ document.addEventListener('DOMContentLoaded', () => {
         currentMonthDisplay.textContent = formatMonthYear(currentMonth, currentYear);
     }
 
+    function updateHistoryList() {
+        historyList.innerHTML = '';
+        const transactions = JSON.parse(localStorage.getItem('transactions')) || [];
+
+        const groupedTransactions = transactions.reduce((acc, transaction) => {
+            const date = new Date(transaction.date);
+            const monthYear = formatMonthYear(date.getMonth(), date.getFullYear());
+            if (!acc[monthYear]) {
+                acc[monthYear] = [];
+            }
+            acc[monthYear].push(transaction);
+            return acc;
+        }, {});
+
+        for (const [monthYear, monthTransactions] of Object.entries(groupedTransactions)) {
+            const monthHeader = document.createElement('h3');
+            monthHeader.textContent = monthYear;
+            historyList.appendChild(monthHeader);
+
+            monthTransactions.forEach((transaction, index) => {
+                const transactionElement = document.createElement('div');
+                transactionElement.className = `transaction ${transaction.type}`;
+                transactionElement.innerHTML = `
+                    <span class="transaction-name" data-index="${index}">${transaction.name}</span>
+                    <span class="transaction-amount" data-index="${index}">${transaction.amount.toFixed(2)}</span>
+                `;
+                historyList.appendChild(transactionElement);
+            });
+        }
+    }
+
     function toggleView() {
         showingChart = !showingChart;
         if (showingChart) {
             transactionList.classList.add('hidden');
             document.getElementById('footer').classList.add('hidden');
+            historyList.classList.add('hidden');
             document.getElementById('chart-container').classList.remove('hidden');
             updateChart();
         } else {
             transactionList.classList.remove('hidden');
             document.getElementById('footer').classList.remove('hidden');
+            historyList.classList.add('hidden');
             document.getElementById('chart-container').classList.add('hidden');
         }
     }
 
-    function changeMonth(increment) {
-        currentMonth += increment;
-        if (currentMonth < 0) {
-            currentMonth = 11;
-            currentYear -= 1;
-        } else if (currentMonth > 11) {
-            currentMonth = 0;
-            currentYear += 1;
+    function toggleHistoryView() {
+        showingHistory = !showingHistory;
+        if (showingHistory) {
+            transactionList.classList.add('hidden');
+            document.getElementById('footer').classList.add('hidden');
+            document.getElementById('chart-container').classList.add('hidden');
+            historyList.classList.remove('hidden');
+            updateHistoryList();
+        } else {
+            transactionList.classList.remove('hidden');
+            document.getElementById('footer').classList.remove('hidden');
+            document.getElementById('chart-container').classList.add('hidden');
+            historyList.classList.add('hidden');
         }
-        updateChart();
     }
 
     function openModal(income) {
@@ -198,11 +259,24 @@ document.addEventListener('DOMContentLoaded', () => {
         updateTransactionList();
     }
 
+    function changeMonth(offset) {
+        currentMonth += offset;
+        if (currentMonth < 0) {
+            currentMonth = 11;
+            currentYear -= 1;
+        } else if (currentMonth > 11) {
+            currentMonth = 0;
+            currentYear += 1;
+        }
+        updateChart();
+    }
+
     addIncomeBtn.addEventListener('click', () => openModal(true));
     addExpenseBtn.addEventListener('click', () => openModal(false));
     closeModal.addEventListener('click', closeModalHandler);
     saveTransactionBtn.addEventListener('click', saveTransaction);
     totalAmountDisplay.addEventListener('click', toggleView);
+    appName.addEventListener('click', toggleHistoryView);
     prevMonthBtn.addEventListener('click', () => changeMonth(-1));
     nextMonthBtn.addEventListener('click', () => changeMonth(1));
 
