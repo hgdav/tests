@@ -5,6 +5,11 @@
     --text-color: #ffffff;
 }
 
+@font-face {
+    font-family: 'Nothing';
+    src: url('nothing-font.ttf') format('truetype');
+}
+
 body {
     font-family: "Quicksand", sans-serif;
     margin: 0;
@@ -26,13 +31,14 @@ header {
 }
 
 .app-name {
-    font-family: "Quicksand", sans-serif;
+    font-family: "Nothing", sans-serif;
     margin: 0;
+    letter-spacing: 4px;
     color: var(--text-color);
 }
 
 #total-amount {
-    font-family: "Quicksand", sans-serif;
+    font-family: "Nothing", sans-serif;
     font-size: 1.5rem;
     cursor: pointer;
 }
@@ -124,6 +130,7 @@ button {
 
 .modal-content h2 {
     color: var(--text-color);
+    font-family: 'Nothing', sans-serif;
     margin-top: 0;
     text-align: center;
     text-transform: uppercase;
