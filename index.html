@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>$ Clink</title>
-    <link rel="icon" href="assets/img/favicon.png">
+    <link rel="icon" href="icon-192x192.png">
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="assets/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,14 +24,20 @@
         <div id="transaction-list">
             <!-- transacciones -->
         </div>
-        <canvas id="incomeChart" class="hidden" width="400" height="200"></canvas>
-        <canvas id="expenseChart" class="hidden" width="400" height="200"></canvas>
+        <div id="chart-container" class="hidden">
+            <diV class="center">
+                <button id="prev-month-btn">&lt;</button>
+                <span id="current-month">agosto 2024</span>
+                <button id="next-month-btn">&gt;</button>
+            </diV>
+            <canvas id="combinedChart"></canvas>
+        </div>
     </main>
+
     <footer id="footer">
-        <button id="add-income-btn" class="add-income-btn">
-            <img src="assets/img/dollar-symbol.png">
-        </button>
-        <button id="add-expense-btn" class="add-expense-btn"><img src="assets/img/minus.png"></button>
+        <button id="add-income-btn" class="add-income-btn"><img src="assets/img/dollar-symbol.png"
+                alt="Ingreso"></button>
+        <button id="add-expense-btn" class="add-expense-btn"><img src="assets/img/minus.png" alt="Gasto"></button>
     </footer>
 
     <div id="modal" class="modal">

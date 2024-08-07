@@ -220,3 +220,13 @@ select {
 canvas {
     margin-top: 4rem;
 }
+
+.center {
+    text-align: center;
+}
+
+@media screen and (max-width: 1000px) {
+    #chart-container {
+        margin-top: calc(50% - 5rem);
+    }
+}
