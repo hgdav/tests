@@ -145,15 +145,8 @@ button {
     color: var(--text-color);
 }
 
-select {
-    width: calc(100% - 3px);
-    padding: 18px;
-    margin: 10px 0px 0px 10px;
-    border: none;
-    border-radius: 25px;
-    background-color: var(--secondary-color);
-    color: var(--text-color);
-    height: 3.3rem;
+#transaction-tag {
+    margin-left: 10px;
 }
 
 .mini-form {
