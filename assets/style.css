@@ -70,6 +70,7 @@ button {
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 #add-expense-btn {
@@ -80,22 +81,23 @@ button {
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 #add-income-btn img {
     width: 3rem;
     user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 #add-expense-btn img {
     width: 3rem;
-   user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 .modal {
@@ -140,11 +142,18 @@ button {
 select {
     width: calc(100% - 3px);
     padding: 18px;
-    margin: 10px 0;
+    margin: 10px 0px 0px 10px;
     border: none;
     border-radius: 25px;
     background-color: var(--secondary-color);
     color: var(--text-color);
+    height: 3.3rem;
+}
+
+.mini-form {
+    display: inline-flex;
+    align-content: space-between;
+    width: 100%;
 }
 
 .modal-content button {

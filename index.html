@@ -28,8 +28,8 @@
         <canvas id="expenseChart" class="hidden" width="400" height="200"></canvas>
     </main>
     <footer id="footer">
-        <button id="add-income-btn"><img src="assets/img/dollar-symbol.png"></button>
-        <button id="add-expense-btn"><img src="assets/img/minus.png"></button>
+        <button id="add-income-btn" class="add-income-btn"><img src="assets/img/dollar-symbol.png"></button>
+        <button id="add-expense-btn" class="add-expense-btn"><img src="assets/img/minus.png"></button>
     </footer>
 
     <div id="modal" class="modal">
@@ -37,16 +37,18 @@
             <span class="close" id="close-modal">&times;</span>
             <h2 id="modal-title"></h2>
             <input type="text" id="transaction-name" placeholder="Razón...">
-            <input type="number" id="transaction-amount" placeholder="Monto">
-            <select id="transaction-tag">
-                <option value="Sueldo">Sueldo</option>
-<option value="Proyectos">Proyectos</option>
-                <option value="Transporte">Transporte</option>
-                <option value="Aseo">Aseo</option>
-                <option value="Medicina">Medicina</option>
-                <option value="Comida">Comida</option>
-<option value="Otros">Otros</option>
-            </select>
+            <div class="mini-form">
+                <input type="number" id="transaction-amount" placeholder="Monto">
+                <select id="transaction-tag">
+                    <option value="Sueldo">Sueldo</option>
+                    <option value="Proyectos">Proyectos</option>
+                    <option value="Transporte">Transporte</option>
+                    <option value="Aseo">Aseo</option>
+                    <option value="Medicina">Medicina</option>
+                    <option value="Comida">Comida</option>
+                    <option value="Otros">Otros</option>
+                </select>
+            </div>
             <button id="save-transaction">Guardar</button>
         </div>
     </div>

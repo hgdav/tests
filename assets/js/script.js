@@ -18,24 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let incomeChart, expenseChart;
     let showingChart = false;
 
-    document.addEventListener('contextmenu', function (e) {
-        if (e.target.classList.contains('add-income-btn')) {
-            e.preventDefault();
-        }
-        if (e.target.classList.contains('add-expense-btn')) {
-            e.preventDefault();
-        }
-    }, false);
-
-    document.addEventListener('contextmenu', function (e) {
-        if (e.target.classList.contains('add-income-btn')) {
-            e.preventDefault();
-        }
-        if (e.target.classList.contains('add-expense-btn')) {
-            e.preventDefault();
-        }
-    }, false);
-
     function updateTransactionList() {
         transactionList.innerHTML = '';
         const transactions = JSON.parse(localStorage.getItem('transactions')) || [];
