@@ -66,12 +66,20 @@ button {
     background-color: var(--text-color);
     border-radius: 69px;
     padding: 2.5rem;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 #add-expense-btn {
     background-color: var(--accent-color);
     border-radius: 69px;
     padding: 2.5rem;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 #add-income-btn img {
