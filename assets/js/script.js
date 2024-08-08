@@ -224,11 +224,13 @@ document.addEventListener('DOMContentLoaded', () => {
         showingChart = !showingChart;
         if (showingChart) {
             transactionList.classList.add('hidden');
+            appName.classList.add('hidden');
             document.getElementById('footer').classList.add('hidden');
             document.getElementById('chart-container').classList.remove('hidden');
             updateChart();
         } else {
             transactionList.classList.remove('hidden');
+            appName.classList.remove('hidden');
             document.getElementById('footer').classList.remove('hidden');
             document.getElementById('chart-container').classList.add('hidden');
         }
@@ -238,12 +240,14 @@ document.addEventListener('DOMContentLoaded', () => {
         showingHistory = !showingHistory;
         if (showingHistory) {
             transactionList.classList.add('hidden');
+            totalAmountDisplay.classList.add('hidden');
             document.getElementById('footer').classList.add('hidden');
             document.getElementById('chart-container').classList.add('hidden');
             historyList.classList.remove('hidden');
             updateHistoryList();
         } else {
             transactionList.classList.remove('hidden');
+            totalAmountDisplay.classList.remove('hidden');
             document.getElementById('footer').classList.remove('hidden');
             document.getElementById('chart-container').classList.add('hidden');
             historyList.classList.add('hidden');
